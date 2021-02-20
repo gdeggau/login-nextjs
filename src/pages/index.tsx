@@ -4,17 +4,9 @@ import Head from 'next/head'
 import { useDispatch, useSelector } from 'react-redux'
 import { signInRequest } from '../store/modules/auth/actions'
 
-import {
-  Wrapper,
-  ContainerWrapper,
-  ContainerIntern,
-  ContainerImg,
-  Header,
-  Form,
-  Input,
-  Footer,
-  Error
-} from '../styles/pages/Login'
+import { Form, Wrapper, Container, ContainerImg } from '../styles/pages/Login'
+
+import Input from '../components/Inputs/InputLogin'
 
 import emailIsValid from '../utils/emailIsValid'
 
@@ -29,11 +21,16 @@ const Home: React.FC = () => {
   const [login, setLogin] = useState(INITIAL_VALUES)
   const [errors, setErrors] = useState(INITIAL_VALUES)
 
+  useEffect(() => clearField(), [signed])
+
   const clearField = () => {
     if (signed) setLogin(INITIAL_VALUES)
   }
 
-  useEffect(() => clearField(), [signed])
+  const clearFieldOnError = field => {
+    setLogin({ ...login, [field]: '' })
+    setErrors({ ...errors, [field]: '' })
+  }
 
   const onChange = e => {
     if (errors[e.target.name]) setErrors({ ...errors, [e.target.name]: '' })
@@ -81,22 +78,22 @@ const Home: React.FC = () => {
         <title>Login</title>
       </Head>
       <ContainerImg />
-      <ContainerWrapper>
-        <ContainerIntern>
-          <Header>
+      <Container>
+        <Container.Intern>
+          <Container.Intern.Header>
             <h1>Olá, seja bem-vindo!</h1>
             <p>Para acessar a plataforma, faça seu login.</p>
-          </Header>
+          </Container.Intern.Header>
           <Form onSubmit={handleSubmit}>
             <label>E-MAIL</label>
             <Input
               name="email"
               value={login.email}
               error={errors.email}
-              type="search"
               onChange={onChange}
+              clearFieldOnError={() => clearFieldOnError('email')}
             />
-            <Error>{errors?.email}</Error>
+            <Form.Error>{errors?.email}</Form.Error>
 
             <label>SENHA</label>
             <Input
@@ -106,20 +103,20 @@ const Home: React.FC = () => {
               type="password"
               onChange={onChange}
             />
-            <Error>{errors?.password}</Error>
+            <Form.Error>{errors?.password}</Form.Error>
 
-            <button type="submit">
+            <Form.Button type="submit">
               {loading ? 'CARREGANDO...' : 'ENTRAR'}
-            </button>
+            </Form.Button>
           </Form>
-          <Footer>
+          <Container.Intern.Footer>
             <p>Esqueceu seu login ou senha?</p>
             <p>
               Clique <a href="">aqui</a>
             </p>
-          </Footer>
-        </ContainerIntern>
-      </ContainerWrapper>
+          </Container.Intern.Footer>
+        </Container.Intern>
+      </Container>
     </Wrapper>
   )
 }
