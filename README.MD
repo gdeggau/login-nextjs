@@ -23,3 +23,4 @@ $ yarn dev
 # ou
 $ npm run dev
 ```
+Após executar os comandos acima, acesse http://localhost:3000 em seu navegador desejado.
