@@ -27,12 +27,12 @@ const Home: React.FC = () => {
     if (signed) setLogin(INITIAL_VALUES)
   }
 
-  const clearFieldOnError = field => {
+  const clearFieldOnError = (field: string) => {
     setLogin({ ...login, [field]: '' })
     setErrors({ ...errors, [field]: '' })
   }
 
-  const onChange = e => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (errors[e.target.name]) setErrors({ ...errors, [e.target.name]: '' })
     setLogin({ ...login, [e.target.name]: e.target.value })
   }
@@ -63,7 +63,7 @@ const Home: React.FC = () => {
     return false
   }
 
-  const handleSubmit = e => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     const { email, password } = login
     if (!errorsInFields()) {
@@ -84,9 +84,10 @@ const Home: React.FC = () => {
             <h1>Olá, seja bem-vindo!</h1>
             <p>Para acessar a plataforma, faça seu login.</p>
           </Container.Intern.Header>
-          <Form onSubmit={handleSubmit}>
+          <Form data-testid="login-form" onSubmit={handleSubmit}>
             <label>E-MAIL</label>
             <Input
+              data-testid="email"
               name="email"
               value={login.email}
               error={errors.email}
@@ -97,6 +98,7 @@ const Home: React.FC = () => {
 
             <label>SENHA</label>
             <Input
+              data-testid="password"
               name="password"
               value={login.password}
               error={errors.password}

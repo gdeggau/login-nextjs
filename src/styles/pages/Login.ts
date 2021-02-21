@@ -1,7 +1,5 @@
 import styled from 'styled-components'
 
-import img from '../../../public/background_img.png'
-
 const BREAK_POINT = '680px'
 
 export const Wrapper = styled.div`
@@ -20,7 +18,7 @@ export const Wrapper = styled.div`
 export const ContainerImg = styled.div`
   background-size: cover;
   background-position: center;
-  background-image: url(${img});
+  background-image: url(${'./background_img.png'});
   max-width: 55vw;
   width: 100%;
 
