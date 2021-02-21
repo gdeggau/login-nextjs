@@ -23,4 +23,16 @@ $ yarn dev
 # ou
 $ npm run dev
 ```
+
 Após executar os comandos acima, acesse http://localhost:3000 em seu navegador desejado.
+
+# Testes
+
+Para executar os testes unitários, execute em sua linha de comando:
+
+```bash
+# Executar testes
+$ yarn test
+# ou
+$ npm run test
+```
